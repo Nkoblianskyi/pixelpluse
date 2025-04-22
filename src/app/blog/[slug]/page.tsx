@@ -1,6 +1,7 @@
 // app/blog/[slug]/page.tsx
 import { notFound } from 'next/navigation';
 import { posts } from '@/data/posts';
+import Image from 'next/image';
 
 interface PageProps {
     params: { slug: string };
@@ -20,7 +21,7 @@ export default function BlogPostPage({ params }: PageProps) {
             <span className="text-sm text-gray-500 uppercase tracking-wide">{post.label}</span>
             <h1 className="text-4xl font-bold mb-6 text-gray-900 leading-tight">{post.title}</h1>
             <p className="text-lg text-gray-700 mb-6">{post.description}</p>
-            <img
+            <Image
                 src={post.image}
                 alt={post.title}
                 className="w-full h-auto mb-8 rounded-lg shadow-md"
