@@ -22,6 +22,7 @@ export default function Footer() {
                 <div>
                     <h4 className="text-lg font-semibold mb-4">Our Services</h4>
                     <ul className="space-y-2 text-gray-300 text-sm">
+                        <li><Link href="/services">Digital Marketing</Link></li>
                         <li><Link href="/services/frontend">Frontend Development</Link></li>
                         <li><Link href="/services/backend">Backend Development</Link></li>
                         <li><Link href="/services/design">UI/UX Design</Link></li>

@@ -10,6 +10,7 @@ export default function Header() {
     const nav = [
         { name: 'Home', href: '/' },
         { name: 'About Us', href: '/about-us' },
+        { name: 'Digital Marketing', href: '/services' },
         { name: 'Services', href: '/services' },
         { name: 'Blog', href: '/blog' },
         { name: 'Contact Us', href: '/contact' },
