@@ -44,7 +44,7 @@ export default function Footer() {
 
             {/* Bottom line */}
             <div className="mt-10 text-center text-gray-400 text-xs border-t border-white/20 pt-6">
-                © {new Date().getFullYear()} All rights reserved to PixelPluse
+                © {new Date().getFullYear()} All rights reserved to PixelPulse
             </div>
         </footer>
     );
