@@ -8,7 +8,7 @@ export default function Footer() {
 
                 {/* About */}
                 <div className="flex flex-col gap-4">
-                    <h3 className="text-2xl font-semibold">PixelPluse</h3>
+                    <h3 className="text-2xl font-semibold">PixelPulse</h3>
                     <p className="text-sm text-gray-200">
                         We are a team of passionate designers and developers building next-generation digital experiences.
                     </p>
@@ -34,7 +34,7 @@ export default function Footer() {
                     <ul className="space-y-2 text-gray-300 text-sm">
                         <li><Link href="/blog">Blog</Link></li>
                         <li><Link href="/contact">Contact us</Link></li>
-                        <li><Link href="/aboiut-us">About Us</Link></li>
+                        <li><Link href="/about-us">About Us</Link></li>
                         <li><Link href="/privacy-policy">Privacy Policy</Link></li>
                         <li><Link href="/cookies">Cookies</Link></li>
                     </ul>

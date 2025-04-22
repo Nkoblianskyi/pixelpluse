@@ -1,44 +1,41 @@
 // app/blog/[slug]/page.tsx
 import { notFound } from 'next/navigation';
-import { reactArticle, nextArticle, nestArticle } from '@/data/blog_articles';
-import { dockerArticle } from '@/data/docker';
-import { drizzleArticle } from '@/data/drizzle';
-import { shadcnArticle } from '@/data/shadcn';
-import ReactMarkdown from 'react-markdown';
+import { posts } from '@/data/posts';
 
-type Article = {
-    slug: string;
-    title: string;
-    content: string;
-};
-
-const articles: Record<string, Article> = {
-    react: reactArticle,
-    next: nextArticle,
-    nest: nestArticle,
-    drizzle: drizzleArticle,
-    shadcn: shadcnArticle,
-    docker: dockerArticle,
-};
-
-// Обов'язкова функція для генерації статичних параметрів
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-    return Object.keys(articles).map((slug) => ({ slug }));
+interface PageProps {
+    params: { slug: string };
 }
 
-export default async function BlogPostPage(props: {
-    params: Promise<{ slug: string }>;
-}) {
-    const { slug } = await props.params;
-    const article = articles[slug];
+export function generateStaticParams() {
+    return posts.map((post) => ({ slug: post.slug }));
+}
 
-    if (!article) return notFound();
+export default function BlogPostPage({ params }: PageProps) {
+    const post = posts.find((p) => p.slug === params.slug);
+
+    if (!post) return notFound();
 
     return (
         <article className="max-w-screen-md mx-auto px-6 py-20 text-gray-800">
-            <h1 className="text-3xl font-bold mb-6 text-gray-900">{article.title}</h1>
-            <div className="prose prose-lg prose-blue">
-                <ReactMarkdown>{article.content}</ReactMarkdown>
+            <span className="text-sm text-gray-500 uppercase tracking-wide">{post.label}</span>
+            <h1 className="text-4xl font-bold mb-6 text-gray-900 leading-tight">{post.title}</h1>
+            <p className="text-lg text-gray-700 mb-6">{post.description}</p>
+            <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-auto mb-8 rounded-lg shadow-md"
+            />
+            <div className="prose prose-lg max-w-none mb-10">
+                <p>{post.content}</p>
+            </div>
+            <div className="prose prose-md max-w-none text-gray-700 border-t pt-6">
+                <p>{post.extraContent}</p>
+            </div>
+            <div className="prose prose-md max-w-none text-gray-700 border-t pt-6">
+                <p>{post.content2}</p>
+            </div>
+            <div className="prose prose-md max-w-none text-gray-700 border-t pt-6">
+                <p>{post.content3}</p>
             </div>
         </article>
     );
