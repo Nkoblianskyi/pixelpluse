@@ -1,18 +1,14 @@
-// app/blog/[slug]/page.tsx
+'use client';
+
+import { use } from 'react';
 import { notFound } from 'next/navigation';
 import { posts } from '@/data/posts';
 import Image from 'next/image';
 
-interface PageProps {
-    params: { slug: string };
-}
+export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = use(params);
 
-export function generateStaticParams() {
-    return posts.map((post) => ({ slug: post.slug }));
-}
-
-export default function BlogPostPage({ params }: PageProps) {
-    const post = posts.find((p) => p.slug === params.slug);
+    const post = posts.find((p) => p.slug === slug);
 
     if (!post) return notFound();
 
@@ -25,18 +21,32 @@ export default function BlogPostPage({ params }: PageProps) {
                 src={post.image}
                 alt={post.title}
                 className="w-full h-auto mb-8 rounded-lg shadow-md"
+                width={1200}
+                height={800}
             />
-            <div className="prose prose-lg max-w-none mb-10">
-                <p>{post.content}</p>
+
+            <div className="prose prose-lg max-w-none mb-10 text-gray-800">
+                {post.content.split('\n').map((para, i) => (
+                    <p key={i}>{para}</p>
+                ))}
             </div>
+
             <div className="prose prose-md max-w-none text-gray-700 border-t pt-6">
-                <p>{post.extraContent}</p>
+                {post.extraContent.split('\n').map((para, i) => (
+                    <p key={i}>{para}</p>
+                ))}
             </div>
+
             <div className="prose prose-md max-w-none text-gray-700 border-t pt-6">
-                <p>{post.content2}</p>
+                {post.content2.split('\n').map((para, i) => (
+                    <p key={i}>{para}</p>
+                ))}
             </div>
+
             <div className="prose prose-md max-w-none text-gray-700 border-t pt-6">
-                <p>{post.content3}</p>
+                {post.content3.split('\n').map((para, i) => (
+                    <p key={i}>{para}</p>
+                ))}
             </div>
         </article>
     );
