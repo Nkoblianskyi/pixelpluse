@@ -1,3 +1,4 @@
+// app/blog/[slug]/page.tsx
 import { notFound } from 'next/navigation';
 import { reactArticle, nextArticle, nestArticle } from '@/data/blog_articles';
 import { dockerArticle } from '@/data/docker';
@@ -20,8 +21,16 @@ const articles: Record<string, Article> = {
     docker: dockerArticle,
 };
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-    const article = articles[params.slug];
+// Обов'язкова функція для генерації статичних параметрів
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+    return Object.keys(articles).map((slug) => ({ slug }));
+}
+
+export default async function BlogPostPage(props: {
+    params: Promise<{ slug: string }>;
+}) {
+    const { slug } = await props.params;
+    const article = articles[slug];
 
     if (!article) return notFound();
 
